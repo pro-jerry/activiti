@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+		<!--  
+		<property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />
+    	<property name="jdbcDriver" value="org.h2.Driver" />
+    	<property name="jdbcUsername" value="sa" />
+    	<property name="jdbcPassword" value="" />
+		-->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hejun" />
+    	<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+    	<property name="jdbcUsername" value="root" />
+    	<property name="jdbcPassword" value="123456" />
+		<!-- 自定义表单字段类型 -->
+		<property name="customFormTypes">
+			<list>
+				<bean class="com.maven.util.JavascriptFormType" />
+			</list>
+		</property>
+		<!-- 自定义表单引擎 -->
+		<property name="customFormEngines">
+			<list>
+				<bean class="com.maven.util.MyFormEngine" />
+			</list>
+		</property>
+		<property name="databaseSchemaUpdate" value="true"/>
+		<property name="activityFontName" value="宋体"></property>
+		<property name="labelFontName" value="宋体"></property>
+	</bean>
+</beans>

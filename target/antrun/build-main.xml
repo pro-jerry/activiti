@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <property file="src/main/resources/application.properties"/>
+  <property name="sql.type" value="${sql.type}"/>
+  <property name="dbunit.datatype" value="org.dbunit.ext.mysql.MySqlDataTypeFactory"/>
+  <taskdef classname="org.dbunit.ant.DbUnitTask" name="dbunit" classpathref="maven.runtime.classpath"/>
+  <java classname="com.maven.util.InitEngineeDatabase" classpathref="maven.runtime.classpath"/>
+  <dbunit userid="${jdbc.username}" driver="${jdbc.driver}" password="${jdbc.password}" url="${jdbc.url}">
+    <dbconfig>
+      <property name="datatypeFactory" value="${dbunit.datatype}"/>
+    </dbconfig>
+    <classpath refid="maven.runtime.classpath"/>
+    <operation transaction="true" format="flat" src="src/main/resources/identity-data.xml" type="CLEAN_INSERT"/>
+  </dbunit>
+</target>
+</project>
