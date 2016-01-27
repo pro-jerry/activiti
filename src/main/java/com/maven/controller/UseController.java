@@ -45,11 +45,17 @@ public class UseController extends AbstractController{
              * 读取角色
              */
             List<Group> groupList = identityService.createGroupQuery().groupMember(user.getId()).list();
+            for(Group group:groupList){
+            	
+            	System.out.println(group.getName()+"--"+group.getType()+"--"+group.getId()+"--"+group.getType());
+            }
             session.setAttribute("groups", groupList);
             String[] groupNames = new String[groupList.size()];
             for(int i=0;i<groupNames.length;i++){
             	groupNames[i] = groupList.get(i).getName();
+            	System.out.println(groupNames[i]);
             }
+            System.out.println(ArrayUtils.toString(groupNames)+"---");
             session.setAttribute("groupNames", ArrayUtils.toString(groupNames));
             
             return "index";

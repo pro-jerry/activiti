@@ -5,19 +5,21 @@
 				http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
-		<property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />
-    	<property name="jdbcDriver" value="org.h2.Driver" />
-    	<property name="jdbcUsername" value="sa" />
-    	<property name="jdbcPassword" value="" />
-
-    	<!-- Database configurations -->
-    	<property name="databaseSchemaUpdate" value="drop-create" />
-
-    	<!-- job executor configurations -->
-    	<property name="jobExecutorActivate" value="false" />
-
-    	<!-- mail server configurations -->
-    	<property name="mailServerPort" value="5025" />
-    	<property name="history" value="full" />
+		<property name="databaseSchemaUpdate" value="true"/>
+		<property name="history" value="full"/>
+		
+		<!-- 自定义表单字段类型 -->
+		<property name="customFormTypes">
+			<list>
+				<bean class="org.activiti.designer.test.JavascriptFormType" />
+			</list>
+		</property>
+		
+		<!-- 自定义表单引擎 -->
+		<property name="customFormEngines">
+			<list>
+				<bean class="org.activiti.designer.test.MyFormEngine" />
+			</list>
+		</property>
 	</bean>
 </beans>
